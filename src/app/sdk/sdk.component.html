@@ -1,0 +1,18 @@
+<ion-content>
+    <ion-router-outlet></ion-router-outlet>
+</ion-content>
+<ion-footer>
+    <app-menu-bottom-item title="Exit" (click)="leave()"
+                          activeIcon="../assets/bottom_menu/exit.svg"
+                          inactiveIcon="../assets/bottom_menu/exit.svg">
+    </app-menu-bottom-item>
+    <app-menu-bottom-item title="Tutorial" route="/sdk/tutorial"
+                          activeIcon="../assets/bottom_menu/icon_tutorial_active.svg"
+                          inactiveIcon="../assets/icon/tutorial.svg">
+    </app-menu-bottom-item>
+    <app-menu-bottom-item title="About App" (click)="about()"
+                          activeIcon="../assets/bottom_menu/about.svg"
+                          inactiveIcon="../assets/bottom_menu/about.svg">
+    </app-menu-bottom-item>
+
+</ion-footer>

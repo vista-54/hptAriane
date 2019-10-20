@@ -1,0 +1,62 @@
+<app-header></app-header>
+<ion-content class="blur">
+    <p class="title">
+        <span class="customer">Welcome, </span>
+        <span class="company"></span>
+    </p>
+    <div class="column">
+        <div class="row">
+            <div class="widget">
+                <div class="header">
+                    <span><img src="../assets/icon/market-share.svg"></span>
+                    <span>MARKET<br> SHARE</span>
+                    <span></span>
+                </div>
+                <app-chart-semi-circle></app-chart-semi-circle>
+                <app-change-progress></app-change-progress>
+            </div>
+            <div class="widget">
+                <div class="header">
+                    <span><img src="../assets/icon/sales-value.svg"></span>
+                    <span>SALES<br> VALUE</span>
+                    <span></span>
+                </div>
+                <div class="value"></div>
+                <app-change-progress></app-change-progress>
+            </div>
+        </div>
+        <div class="row">
+            <div class="widget">
+                <div class="header">
+                    <span><img
+                            src="../assets/icon/icon_service_level.svg"></span><span>SERVICE<br> LEVEL</span><span></span>
+                </div>
+                <app-chart-semi-circle></app-chart-semi-circle>
+                <app-change-progress></app-change-progress>
+            </div>
+            <div class="widget">
+                <div class="header"><span><img
+                        src="../assets/icon/icon_stock_days.svg"></span><span>STOCK<br> DAYS</span><span></span></div>
+                <div class="value"></div>
+                <app-change-progress></app-change-progress>
+            </div>
+        </div>
+        <div class="row">
+            <div class="widget">
+                <div class="header"><span slot="start"><img
+                        src="../assets/icon/icon_number_of_bucket.svg"></span>
+                    <span>NUMBER<br> OF BUCKET</span><span></span>
+                </div>
+                <div class="value"></div>
+                <app-change-progress>
+                </app-change-progress>
+            </div>
+            <div class="widget">
+                <div class="header"><span><img src="../assets/icon/icon_promotion.svg"></span><span>PROMOTION<br> INTENSITY</span><span></span>
+                </div>
+                <app-chart-semi-circle></app-chart-semi-circle>
+                <app-change-progress></app-change-progress>
+            </div>
+        </div>
+    </div>
+</ion-content>

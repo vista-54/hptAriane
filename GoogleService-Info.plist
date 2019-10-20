@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>674891396621-sfo5shtjoasg7tehek044muee02uc7hq.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.674891396621-sfo5shtjoasg7tehek044muee02uc7hq</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBA-Ocse9OlPa9zDTGab23ffGWCoBo9Mko</string>
+	<key>GCM_SENDER_ID</key>
+	<string>674891396621</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>hpt.ariane.semperteam</string>
+	<key>PROJECT_ID</key>
+	<string>hpt-retails</string>
+	<key>STORAGE_BUCKET</key>
+	<string>hpt-retails.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:674891396621:ios:9b11e96ce843de06b14744</string>
+	<key>DATABASE_URL</key>
+	<string>https://hpt-retails.firebaseio.com</string>
+</dict>
+</plist>
