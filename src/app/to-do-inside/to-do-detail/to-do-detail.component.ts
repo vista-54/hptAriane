@@ -1,17 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {PARAMS} from '../to-do-list/to-do-list.component';
+import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ToDoListService} from '../shared/services/to-do-list.service';
 import {NavController} from '@ionic/angular';
+import {TODO_PARAMS} from '../../shared/constants/to-do-params';
 
 @Component({
     selector: 'app-to-do-detail',
     templateUrl: './to-do-detail.component.html',
     styleUrls: ['./to-do-detail.component.scss'],
 })
-export class ToDoDetailComponent implements OnInit {
+export class ToDoDetailComponent {
     user: any;
-    params = PARAMS;
+    params = TODO_PARAMS;
     data: any;
     public prop: any;
     public alertCode: any;
@@ -20,7 +20,7 @@ export class ToDoDetailComponent implements OnInit {
 
     constructor(private toDetailService: ToDoListService,
                 private route: ActivatedRoute, private navCtrl: NavController) {
-        this.user = JSON.parse(localStorage['user']);
+        this.user = JSON.parse(localStorage.getItem('user'));
         if (this.route.snapshot.data['data']) {
             this.prop = this.route.snapshot.data['data']['result'];
             this.alertCode = this.route.snapshot.params.code;
@@ -30,11 +30,10 @@ export class ToDoDetailComponent implements OnInit {
 
     }
 
-    ngOnInit() {
-        console.log(this.prop);
-        console.log(this.alertCode);
-    }
 
+    ionViewWillEnter() {
+
+    }
 
     complete() {
         const data = {

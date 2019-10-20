@@ -12,6 +12,7 @@ import {ToDoRouting} from './to-do-routing';
 import {ToDoListComponent} from './to-do-list/to-do-list.component';
 import {ToDoDetailService} from './shared/services/to-do-detail.service';
 import {SharedModule} from '../shared/shared.module';
+import {CommonService} from '../shared/services/common.service';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {SharedModule} from '../shared/shared.module';
     ],
     providers: [
         ToDoListService,
-        ToDoDetailService
+        ToDoDetailService,
+        CommonService
     ]
 })
 export class ToDoInsideModule {

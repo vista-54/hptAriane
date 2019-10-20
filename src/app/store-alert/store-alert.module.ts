@@ -17,6 +17,8 @@ import {CreateToDoComponent} from './create-to-do/create-to-do.component';
 import {SharedModule} from '../shared/shared.module';
 import {CreateToDoService} from './shared/create-to-do.service';
 import {ToDoNotSavedComponent} from '../shared/components/to-do-not-saved/to-do-not-saved.component';
+import {CommonService} from '../shared/services/common.service';
+import {IsToDoSaved} from './shared/guards/isToDoSaved';
 
 
 @NgModule({
@@ -40,7 +42,9 @@ import {ToDoNotSavedComponent} from '../shared/components/to-do-not-saved/to-do-
         StoreAlertService,
         AlertDetailService,
         ReportService,
-        CreateToDoService
+        CreateToDoService,
+        CommonService,
+        IsToDoSaved
     ]
 })
 export class StoreAlertModule {

@@ -1,10 +1,11 @@
-import {Resolve, Router} from '@angular/router';
+import {Resolve} from '@angular/router';
 import {Injectable} from '@angular/core';
-import {ModalController} from '@ionic/angular';
 import {RequestService} from '../../../shared/services/request.service';
 import {APP_URL} from '../../../shared/constants/url';
 import {tap} from 'rxjs/operators';
-import {AccessDaniedComponent} from '../../../shared/components/access-danied/access-danied.component';
+import {UserModel} from '../../../shared/models/user.model';
+import {CautionModalFailedRetrieveInfoComponent} from '../../../shared/components/caution-modal-failed-retrieve-info/caution-modal-failed-retrieve-info.component';
+import {CommonService} from '../../../shared/services/common.service';
 
 export declare interface TodoResponse {
     code: string;
@@ -25,17 +26,21 @@ declare interface ResponseResult {
 export class ToDoService implements Resolve<any> {
 
 
-    constructor(public request: RequestService, public modalController: ModalController, public router: Router) {
+    constructor(public request: RequestService, private commonService: CommonService) {
     }
 
     resolve() {
-        const userId = JSON.parse(localStorage['user']).userid;
-        return this.get({user_id: userId});
+        const user = JSON.parse(localStorage.getItem('user')) as UserModel;
+        return this.get({user_id: user.userid});
     }
 
     get(data) {
         return this.request.get(APP_URL.to_do.get, data)
             .pipe(tap((res: TodoResponse) => {
+                    if (res.code !== '0') {
+                        this.commonService.presentModal(CautionModalFailedRetrieveInfoComponent);
+                        throw Error(res.message);
+                    }
                 },
                 err => {
                     console.log(err);
@@ -46,7 +51,10 @@ export class ToDoService implements Resolve<any> {
     list(data) {
         return this.request.get(APP_URL.to_do.list, data)
             .pipe(tap((res: TodoResponse) => {
-                    console.log(res);
+                    if (res.code !== '0') {
+                        this.commonService.presentModal(CautionModalFailedRetrieveInfoComponent);
+                        throw Error(res.message);
+                    }
                 },
                 err => {
                     console.log(err);

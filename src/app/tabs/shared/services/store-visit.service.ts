@@ -25,7 +25,7 @@ export class StoreVisitService implements Resolve<any> {
     get(data) {
         return this.request.get(APP_URL.store_visit.get, data)
             .pipe(tap((res: APIResponse) => {
-                    if (res.code === RESPONSE_CODE.FAILED_TO_RETRIEVE) {
+                    if (res.code !== '0') {
                         this.commonService.presentModal(CautionModalFailedRetrieveInfoComponent);
                         throw Error(res.message);
                     }

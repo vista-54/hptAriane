@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {PARAMS} from '../../to-do-inside/to-do-list/to-do-list.component';
+import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {CreateToDoService} from '../shared/create-to-do.service';
 import {ModalController, NavController} from '@ionic/angular';
 import {ToDo} from './todo.model';
-import {ToDoNotSavedComponent} from '../../shared/components/to-do-not-saved/to-do-not-saved.component';
+import {TODO_PARAMS} from '../../shared/constants/to-do-params';
+import {RESPONSE_CODE} from '../../shared/constants/response';
+import {CommonService} from '../../shared/services/common.service';
 
 
 @Component({
@@ -12,16 +13,15 @@ import {ToDoNotSavedComponent} from '../../shared/components/to-do-not-saved/to-
     templateUrl: './create-to-do.component.html',
     styleUrls: ['./create-to-do.component.scss'],
 })
-export class CreateToDoComponent implements OnInit {
-    params = PARAMS;
+export class CreateToDoComponent {
+    params = TODO_PARAMS;
     state: any;
     date: Date;
     toDo: ToDo;
     note: string;
-    selectedDate: any;
+    selectedDate: Date;
 
-    constructor(private router: Router, private createToDoService: CreateToDoService, private nav: NavController,
-                private modalController: ModalController) {
+    constructor(private router: Router, private createToDoService: CreateToDoService, private nav: NavController) {
 
         const user = JSON.parse(localStorage.user);
         const navigation = this.router.getCurrentNavigation();
@@ -37,48 +37,17 @@ export class CreateToDoComponent implements OnInit {
 
     }
 
-    checkBackButton() {
-        if (this.selectedDate || this.note) {
-            this.showConfirmationModal();
-            return false;
-        } else {
-            this.nav.back();
-        }
-    }
-
-
-    private async showConfirmationModal() {
-        const modal = await this.modalController.create({
-            component: ToDoNotSavedComponent,
-            cssClass: 'shareModal',
-        });
-        modal.onDidDismiss()
-            .then((detail) => {
-                console.log(detail ? detail.data : null);
-                if (detail.data) {
-                    this.nav.back();
-                }
-            });
-        return await modal.present();
-    }
-
-    ngOnInit() {
-
-
-    }
-
-
     create() {
         this.toDo.note = this.note;
         this.toDo.due_date = this.selectedDate;
         this.createToDoService.save(this.toDo)
-            .subscribe(next => {
-                if (next.code === '0') { // need to refactor
+            .subscribe((next: APIResponse) => {
+                if (next.code === RESPONSE_CODE.SUCCESS) {
+                    this.note = '';
+                    this.selectedDate = null;
                     this.nav.back();
                 }
-                console.log(next);
-            })
-        console.log(this.toDo);
+            });
     }
 
 }

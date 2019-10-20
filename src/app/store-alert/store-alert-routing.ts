@@ -8,6 +8,7 @@ import {AlertDetailService} from './shared/alert-detail.service';
 import {ReportComponent} from './report/report.component';
 import {CreateToDoComponent} from './create-to-do/create-to-do.component';
 import {ReportService} from './shared/report.service';
+import {IsToDoSaved} from './shared/guards/isToDoSaved';
 
 
 const routes: Routes = [
@@ -32,9 +33,7 @@ const routes: Routes = [
                 }
             }, {
                 path: 'create-to-do', component: CreateToDoComponent,
-                // resolve: {
-                //     data: ReportService
-                // }
+                canDeactivate: [IsToDoSaved]
             },
             {path: '', redirectTo: 'main', pathMatch: 'full'}
         ]

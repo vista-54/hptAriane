@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
-import {PARAMS} from '../../to-do-inside/to-do-list/to-do-list.component';
+import {TODO_PARAMS} from '../../shared/constants/to-do-params';
 
 
 @Component({
@@ -12,7 +12,7 @@ import {PARAMS} from '../../to-do-inside/to-do-list/to-do-list.component';
 
 export class StoreAlertDetailComponent implements OnInit {
     user: any;
-    params = PARAMS;
+    params = TODO_PARAMS;
     data: any;
     public prop: any;
 

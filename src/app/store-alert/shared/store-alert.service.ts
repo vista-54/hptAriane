@@ -1,35 +1,43 @@
-import {Resolve, Router} from '@angular/router';
+import {Resolve} from '@angular/router';
 import {Injectable} from '@angular/core';
-import {ModalController} from '@ionic/angular';
 import {RequestService} from '../../shared/services/request.service';
 import {APP_URL} from '../../shared/constants/url';
 import {tap} from 'rxjs/operators';
-import {TodoResponse} from '../../tabs/shared/services/to-do.service';
+import {UserModel} from '../../shared/models/user.model';
+import {CautionModalFailedRetrieveInfoComponent} from '../../shared/components/caution-modal-failed-retrieve-info/caution-modal-failed-retrieve-info.component';
+import {CommonService} from '../../shared/services/common.service';
 
 @Injectable()
 export class StoreAlertService implements Resolve<any> {
 
 
-    constructor(public request: RequestService, public modalController: ModalController, public router: Router) {
+    constructor(public request: RequestService, private commonService: CommonService) {
     }
 
 
     resolve() {
-        const userId = JSON.parse(localStorage['user']).userid;
-        return this.get({user_id: userId});
+        const user = JSON.parse(localStorage.getItem('user')) as UserModel;
+        return this.get({user_id: user.userid});
     }
 
     get(data) {
-        return this.request.get(APP_URL.store_visit.alert_main, data);
+        return this.request.get(APP_URL.store_visit.alert_main, data)
+            .pipe(tap((res: APIResponse) => {
+                if (res.code !== '0') {
+                    this.commonService.presentModal(CautionModalFailedRetrieveInfoComponent);
+                    throw Error(res.message);
+                }
+            }));
+
     }
 
     view(data, alert) {
         return this.request.get(APP_URL.store_visit.alert_main + '/' + alert, data)
-            .pipe(tap((res: TodoResponse) => {
-                    console.log(res);
-                },
-                err => {
-                    console.log(err);
+            .pipe(tap((res: APIResponse) => {
+                    if (res.code !== '0') {
+                        this.commonService.presentModal(CautionModalFailedRetrieveInfoComponent);
+                        throw Error(res.message);
+                    }
                 }));
     }
 }

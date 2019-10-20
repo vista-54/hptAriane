@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ReportService} from '../shared/report.service';
 import {NavController} from '@ionic/angular';
+import {RESPONSE_CODE} from '../../shared/constants/response';
 
 @Component({
     selector: 'app-report',
@@ -51,11 +52,10 @@ export class ReportComponent implements OnInit {
             note: this.note
         };
         this.reportService.send(data)
-            .subscribe(res => {
-                if (res.code === '0') {
+            .subscribe((res: APIResponse) => {
+                if (res.code === RESPONSE_CODE.SUCCESS) {
                     this.navCtrl.back();
                 }
-                console.log(res);
             });
     }
 

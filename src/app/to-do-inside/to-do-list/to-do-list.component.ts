@@ -1,69 +1,24 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ToDoListService} from '../shared/services/to-do-list.service';
 import {NavController} from '@ionic/angular';
+import {TODO_PARAMS} from '../../shared/constants/to-do-params';
+import {UserModel} from '../../shared/models/user.model';
 
-declare interface TodoParams {
-    title: string;
-    image: string;
-    changed_value: string;
-}
-
-export const PARAMS = {
-    SHARE: {
-        icon: '../assets/todo/todo_market_share.svg',
-        style: 'market_share',
-        title: 'market share',
-        translate: 'market'
-    },
-    SALES: {
-        icon: '../assets/todo/todo_sales.svg',
-        style: 'sales',
-        title: 'sales',
-        translate: 'sales'
-
-    },
-    SERVICE: {
-        icon: '../assets/todo/todo_service_level.svg',
-        style: 'service_level',
-        title: 'service level',
-        translate: 'service'
-    },
-    STOCK: {
-        icon: '../assets/todo/todo_stock_days.svg',
-        style: 'stock_days',
-        title: 'stock days',
-        translate: 'stock'
-    },
-    BASKET: {
-        icon: '../assets/todo/todo_numbers_of_basket.svg',
-        style: 'number_of_basket',
-        title: 'number of basket',
-        translate: 'number'
-    },
-    PROMO: {
-        icon: '../assets/todo/todo_promo.svg',
-        style: 'promotion_intensity',
-        title: 'promotion intensity',
-        translate: 'promo'
-    }
-};
 
 @Component({
     selector: 'app-to-do-list',
     templateUrl: './to-do-list.component.html',
     styleUrls: ['./to-do-list.component.scss'],
 })
-export class ToDoListComponent implements OnInit {
+export class ToDoListComponent {
 
-    todoParams: TodoParams;
     defaultType = '0';
     defaultDirection = 1;
     @Input('prop') public prop: any;
-    @Input('alertCode') public alertCode: any;
-    order: 'ASC';
-    params = PARAMS;
-    user: any;
+    @Input('alertCode') public alertCode = 'DEFAULT';
+    params = TODO_PARAMS;
+    user: UserModel;
     taskList: any[];
     filterField = 0;
     taskIds = [];
@@ -73,9 +28,8 @@ export class ToDoListComponent implements OnInit {
 
     constructor(private route: ActivatedRoute,
                 private toDoListService: ToDoListService,
-                private navController: NavController) {
-        this.user = JSON.parse(localStorage['user']);
-        this.reloadData();
+                private navCtrl: NavController) {
+        this.user = JSON.parse(localStorage.getItem('user')) as UserModel;
     }
 
     ionViewWillEnter() {
@@ -83,10 +37,6 @@ export class ToDoListComponent implements OnInit {
         console.log('will enter');
     }
 
-    ngOnInit() {
-        console.log(this.alertCode);
-        // this.filterByStatus(this.defaultType);
-    }
 
     taskTypeChanged(event) {
         this.defaultType = event.detail.value;
@@ -99,7 +49,6 @@ export class ToDoListComponent implements OnInit {
     filterByStatus(status) {
         this.taskList = this.prop.filter(item => {
             item.selected = false;
-            debugger
             return item.complete === status;
         });
     }
@@ -196,15 +145,14 @@ export class ToDoListComponent implements OnInit {
     reloadData() {
         if (this.route.snapshot.data['data']) {
             this.prop = this.route.snapshot.data['data']['result'];
+            if (!this.prop.length) {
+                this.navCtrl.navigateRoot(['/tabs/to-do']);
+                return false;
+            }
             this.alertCode = this.route.snapshot.params.code;
             console.log(this.prop);
             this.filterByStatus(this.defaultType);
         }
     }
 
-    openTodo() {
-        // /tabs/to-do
-        debugger
-        this.navController.navigateRoot(['/tabs/to-do']);
-    }
 }

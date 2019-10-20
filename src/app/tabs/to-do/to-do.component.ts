@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ModalController} from '@ionic/angular';
+import {ModalController, NavController} from '@ionic/angular';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToDoService} from '../shared/services/to-do.service';
-import {PARAMS} from '../../to-do-inside/to-do-list/to-do-list.component';
 import {MOCKTODO} from './mock.data';
+import {TODO_PARAMS} from '../../shared/constants/to-do-params';
 
 @Component({
     selector: 'app-to-do',
@@ -11,22 +11,24 @@ import {MOCKTODO} from './mock.data';
     styleUrls: ['./to-do.component.scss'],
 })
 export class ToDoComponent implements OnInit {
-    params = PARAMS
+    params = TODO_PARAMS;
     mock = MOCKTODO;
     user: any;
     data: any;
     dataObjects: any;
 
     constructor(private modalController: ModalController, private route: ActivatedRoute,
-                private todoService: ToDoService, private router: Router) {
+                private todoService: ToDoService, private router: Router, private navCtrl: NavController) {
         this.user = JSON.parse(localStorage.user);
         console.log('constructor');
 
     }
 
     ngOnInit() {
-        debugger
-        console.log('init')
+        console.log('init');
+    }
+
+    ionViewWillEnter() {
         const data = this.route.snapshot.data['data'];
         if (data.hasOwnProperty('result')) {
             this.dataObjects = data['result'];
@@ -34,12 +36,18 @@ export class ToDoComponent implements OnInit {
             this.data = this.valuesToArray(this.mock)
             console.log(this.data);
         }
-    }
-
-    ionViewWillEnter() {
-debugger
         console.log('enter');
     }
+
+    ionViewDidEnter() {
+        console.log('ionViewDidEnter');
+
+    }
+
+    ionViewWillLeave() {
+        console.log('ionViewWillLeave');
+    }
+
 
     valuesToArray(obj) {
         const that = this;
@@ -60,24 +68,11 @@ debugger
         });
     }
 
-
-    openList(alertCode: string) {
-
-        const data = {
-            alert_code: alertCode,
-            user_id: this.user.userid
-        };
-        this.todoService.list(data)
-            .subscribe(res => {
-                // this.openToDoList(res.result, alertCode);
-            });
-    }
-
     openToDoList(code, alerts) {
         if (alerts === 0) {
             return false;
         }
-        this.router.navigate(['/to-do/list', code]);
+        this.navCtrl.navigateRoot(['/to-do/list', code]);
     }
 
 

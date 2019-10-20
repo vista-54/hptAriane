@@ -1,7 +1,8 @@
 <ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
-            <a (click)="openTodo()"><img src="../assets/icon/header_arrow.svg">Back</a>
+            <ion-back-button defaultHref="tabs/to-do"></ion-back-button>
+            <!--<a (click)="openTodo()"><img src="../assets/icon/header_arrow.svg">Back</a>-->
         </ion-buttons>
         <ion-title><span>HPT Ariane</span><span>Collaboration Platform</span></ion-title>
         <ion-buttons slot="end">
@@ -64,7 +65,7 @@
             {{'todo_list.mark'|translate}}
         </ion-button>
         <ion-button expand="block danger" (click)="delete()">{{'todo_list.rm'|translate}}</ion-button>
-        <ion-button expand="block ok" routerLink="/tabs/home">{{'alert_main.home'|translate}}</ion-button>
+        <ion-button expand="block ok" routerDirection="root" routerLink="/tabs/home">{{'alert_main.home'|translate}}</ion-button>
 
     </div>
 </ion-content>

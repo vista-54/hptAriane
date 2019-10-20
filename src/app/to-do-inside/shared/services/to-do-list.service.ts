@@ -5,41 +5,36 @@ import {APP_URL} from '../../../shared/constants/url';
 import {Injectable} from '@angular/core';
 import {RequestService} from '../../../shared/services/request.service';
 import {tap} from 'rxjs/operators';
+import {UserModel} from '../../../shared/models/user.model';
+import {CautionModalFailedRetrieveInfoComponent} from '../../../shared/components/caution-modal-failed-retrieve-info/caution-modal-failed-retrieve-info.component';
+import {CommonService} from '../../../shared/services/common.service';
 
 @Injectable()
 export class ToDoListService implements Resolve<any> {
 
 
-    constructor(public request: RequestService, public modalController: ModalController, public router: Router) {
+    constructor(public request: RequestService, public modalController: ModalController, public router: Router,
+                private commonService: CommonService) {
     }
 
 
     resolve(route: ActivatedRouteSnapshot) {
         const alertCode = route.paramMap.get('code');
-        const userId = JSON.parse(localStorage['user']).userid;
-        return this.list({user_id: userId, alert_code: alertCode});
+        const user = JSON.parse(localStorage.getItem('user')) as UserModel;
+        return this.list({user_id: user.userid, alert_code: alertCode});
     }
 
 
     list(data) {
         return this.request.get(APP_URL.to_do.list, data)
             .pipe(tap((res: TodoResponse) => {
-                    console.log(res);
-                },
-                err => {
-                    console.log(err);
-                }));
+                if (res.code !== '0') {
+                    this.commonService.presentModal(CautionModalFailedRetrieveInfoComponent);
+                    throw Error(res.message);
+                }
+            }));
     }
 
-    view(data) {
-        return this.request.get(APP_URL.to_do.view, data)
-            .pipe(tap((res: TodoResponse) => {
-                    console.log(res);
-                },
-                err => {
-                    console.log(err);
-                }));
-    }
 
     markAs(data) {
         return this.request.post(APP_URL.to_do.update, data)
