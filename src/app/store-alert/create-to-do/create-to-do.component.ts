@@ -1,11 +1,10 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {CreateToDoService} from '../shared/create-to-do.service';
-import {ModalController, NavController} from '@ionic/angular';
+import {NavController} from '@ionic/angular';
 import {ToDo} from './todo.model';
 import {TODO_PARAMS} from '../../shared/constants/to-do-params';
 import {RESPONSE_CODE} from '../../shared/constants/response';
-import {CommonService} from '../../shared/services/common.service';
 
 
 @Component({
@@ -45,9 +44,13 @@ export class CreateToDoComponent {
                 if (next.code === RESPONSE_CODE.SUCCESS) {
                     this.note = '';
                     this.selectedDate = null;
-                    this.nav.back();
+                    this.goBack();
                 }
             });
+    }
+
+    goBack() {
+        this.nav.back();
     }
 
 }

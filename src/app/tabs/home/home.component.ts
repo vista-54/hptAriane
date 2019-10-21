@@ -3,6 +3,7 @@ import {ModalController} from '@ionic/angular';
 import {WidgetModel} from '../shared/models/widget.model';
 import {HomeHeaderModel} from '../shared/models/homeHeader.model';
 import {DatascopeComponent} from '../../shared/components/datascope/datascope.component';
+import {WIDGET_PARAMS} from '../../shared/constants/widget';
 
 @Component({
     selector: 'app-home',
@@ -13,7 +14,7 @@ export class HomeComponent implements OnInit {
 
     widgets: WidgetModel[];
     header: HomeHeaderModel;
-
+    widgetsParams = WIDGET_PARAMS;
 
     constructor(private modalController: ModalController) {
         this.loadWidgets();

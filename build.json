@@ -1,9 +1,9 @@
 {
   "android": {
     "release": {
-      "keystore": "tuning.keystore",
+      "keystore": "ariane.keystore",
       "storePassword": "111111",
-      "alias": "tuning",
+      "alias": "ariane",
       "password": "111111",
       "keystoreType": ""
     }

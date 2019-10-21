@@ -28,6 +28,11 @@ export class Info1Component implements OnInit {
         events.subscribe('login:error', () => {
             this.inputElement.setFocus();
         });
+        const loginCredentials = localStorage.getItem('login');
+        if (loginCredentials) {
+            this.credentials.patchValue(JSON.parse(loginCredentials));
+        }
+
     }
 
     ngOnInit() {
@@ -39,6 +44,7 @@ export class Info1Component implements OnInit {
      */
     next() {
         this.auth.login(this.credentials.value).subscribe(success => {
+            localStorage.setItem('login', JSON.stringify(this.credentials.value));
             const result = success as LoginResponse;
             if (result.code === RESPONSE_CODE.SUCCESS) {
                 this.router.navigate(['auth/more-info']);

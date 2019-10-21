@@ -101,18 +101,18 @@
   },
   "home": {
     "welcome": "Welcome,",
-    "market": "MARKET",
-    "share": "SHARE",
-    "sales": "SALES",
-    "value": "VALUE",
-    "service": "SERVICE",
-    "level": "LEVEL",
-    "stock": "STOCK",
-    "days": "DAYS",
-    "number": "NUMBER",
-    "of_bucket": "OF BASKET",
-    "promo": "PROMOTION",
-    "inten": "INTENSITY",
+    "Market": "MARKET",
+    "Share": "SHARE",
+    "Sales": "SALES",
+    "Value": "VALUE",
+    "Service": "SERVICE",
+    "Level": "LEVEL",
+    "Stock": "STOCK",
+    "Days": "DAYS",
+    "Number": "NUMBER",
+    "of Baskets": "OF BASKET",
+    "Promotion": "PROMOTION",
+    "Intensity": "INTENSITY",
     "datascope": "Data Scope",
     "change": "Change"
   },
@@ -249,7 +249,7 @@
     "p1": "The To-Do is not saved!  Do you want to go back to the previous page without saving the To-Do?"
   },
   "m_about":{
-    "header":"Want to Know More?",
+    "header":"",
     "p1":"To access more data and discover valuable insights, kindly download the HPT Ariane Mobile App from the"
   }
 }

@@ -10,7 +10,6 @@ import {ComponentsModule} from '../shared/components/components.module';
 import {SdkRouting} from './sdk.routing';
 import {SdkService} from './home-sdk/sdk.service';
 import {TutorialSdkComponent} from './tutorial/tutorial-sdk.component';
-import {TranslateModule} from '@ngx-translate/core';
 import {PrepareSdkComponent} from './prepare-sdk/prepare-sdk.component';
 import {DirectiveModule} from '../shared/directives/directive.module';
 

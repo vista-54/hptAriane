@@ -1,7 +1,9 @@
 <ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
+            <a (click)="goBack()"><img src="../assets/icon/header_arrow.svg">Home</a>
+
+            <!--<ion-back-button></ion-back-button>-->
         </ion-buttons>
         <ion-title><span>HPT Ariane</span><span>Collaboration Platform</span></ion-title>
         <ion-buttons slot="end">
@@ -43,7 +45,7 @@
         <div class="detail todo">
             <ion-label class="label label_with_image"><img src="../assets/todo/create_todo_icon.svg">{{'create_todo.todo'|translate}}:
             </ion-label>
-            <textarea rows="5" [(ngModel)]="note"></textarea>
+            <ion-textarea rows="5" [(ngModel)]="note"></ion-textarea>
         </div>
         <div class="detail">
             <div class="col todo">

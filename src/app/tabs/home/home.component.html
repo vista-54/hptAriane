@@ -5,58 +5,16 @@
         <span class="company">{{header.company}}</span>
     </p>
     <div class="column">
-        <div class="row">
-            <div class="widget">
-                <div class="header">
-                    <span><img src="../assets/icon/market-share.svg"></span>
-                    <span>{{'home.market'|translate}}<br>{{'home.share'|translate}} </span>
-                    <span></span>
-                </div>
-                <app-chart-semi-circle [growth]="widgets[0].growth" [unit]="widgets[0].unit"></app-chart-semi-circle>
-                <app-change-progress [growth]="widgets[0].growth"></app-change-progress>
+        <div class="widget" *ngFor="let widget of widgets">
+            <div class="header">
+                <span><img [src]="widgetsParams[widget.name].icon"></span>
+                <span>{{'home.'+widgetsParams[widget.name].title1|translate}}<br>{{'home.'+widgetsParams[widget.name].title2|translate}} </span>
+                <span></span>
             </div>
-            <div class="widget">
-                <div class="header">
-                    <span><img src="../assets/icon/sales-value.svg"></span>
-                    <span>{{'home.sales'|translate}}<br>{{'home.value'|translate}} </span>
-                    <span></span>
-                </div>
-                <div class="value">{{widgets[1].end}} {{widgets[1].unit}}</div>
-                <app-change-progress [growth]="widgets[1].growth"></app-change-progress>
-            </div>
-        </div>
-        <div class="row">
-            <div class="widget">
-                <div class="header">
-                    <span><img
-                            src="../assets/icon/icon_service_level.svg"></span><span>{{'home.service'|translate}}<br>{{'home.level'|translate}} </span><span></span>
-                </div>
-                <app-chart-semi-circle [growth]="widgets[2].growth" [unit]="widgets[2].unit"></app-chart-semi-circle>
-                <app-change-progress [growth]="widgets[2].growth"></app-change-progress>
-            </div>
-            <div class="widget">
-                <div class="header"><span><img
-                        src="../assets/icon/icon_stock_days.svg"></span><span>{{'home.stock'|translate}}<br>{{'home.days'|translate}} </span><span></span>
-                </div>
-                <div class="value">{{widgets[3].end}} {{widgets[3].unit}}</div>
-                <app-change-progress [growth]="widgets[3].growth"></app-change-progress>
-            </div>
-        </div>
-        <div class="row">
-            <div class="widget">
-                <div class="header"><span slot="start"><img
-                        src="../assets/icon/icon_number_of_bucket.svg"></span>
-                    <span>{{'home.number'|translate}}<br> {{'home.of_bucket'|translate}}</span><span></span>
-                </div>
-                <div class="value">{{widgets[4].end}} {{widgets[4].unit}}</div>
-                <app-change-progress [growth]="widgets[4].growth"></app-change-progress>
-            </div>
-            <div class="widget">
-                <div class="header"><span><img src="../assets/icon/icon_promotion.svg"></span><span>{{'home.promo'|translate}}<br>{{'home.inten'|translate}} </span><span></span>
-                </div>
-                <app-chart-semi-circle [growth]="widgets[5].growth" [unit]="widgets[5].unit"></app-chart-semi-circle>
-                <app-change-progress [growth]="widgets[5].growth"></app-change-progress>
-            </div>
+            <div *ngIf="!widgetsParams[widget.name].circle" class="value">{{widget.end}} {{widget.unit}}</div>
+            <app-chart-semi-circle *ngIf="widgetsParams[widget.name].circle" [growth]="widget.end"
+                                   [unit]="widget.unit"></app-chart-semi-circle>
+            <app-change-progress [growth]="widget.growth"></app-change-progress>
         </div>
     </div>
     <ion-button expand="block" (click)="dataScope()">{{'home.datascope'|translate}}</ion-button>

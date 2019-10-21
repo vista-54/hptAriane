@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../shared/services/auth.service';
 import {Router} from '@angular/router';
 import {RESPONSE_CODE_VERIFY_TOKEN} from '../../shared/constants/response_code';
@@ -14,7 +14,7 @@ import {RequestTokenModel} from '../shared/models/requestToken.model';
     styleUrls: ['./more-info.component.scss'],
 })
 export class MoreInfoComponent implements OnInit {
-    credentials: any;
+    credentials: FormGroup;
     user: any;
     @ViewChild('code', {static: false}) inputElement: IonInput;
 
@@ -23,6 +23,7 @@ export class MoreInfoComponent implements OnInit {
                 public router: Router,
                 public events: Events) {
         this.user = JSON.parse(localStorage.user);
+        const latestToken = localStorage.getItem('latestToken');
         this.credentials = this.formBuilder.group({
             email: [this.user.email, [Validators.required]],
             supplier_id: [this.user.supplier_id, [Validators.required]],
@@ -34,6 +35,9 @@ export class MoreInfoComponent implements OnInit {
             phone: [this.user.phone, []],
             token: ['', [Validators.required]],
         });
+        if (latestToken) {
+            this.credentials.patchValue({token: latestToken});
+        }
         events.subscribe('token:error', () => {
             this.inputElement.setFocus();
         });
@@ -47,6 +51,7 @@ export class MoreInfoComponent implements OnInit {
             user_id: this.user.userid,
             token: this.credentials.value.token
         };
+        localStorage.setItem('latestToken', this.credentials.value.token);
         this.auth.verifyToken(verifyTokenCredentials)
             .subscribe(success => {
                 const result = success as VerifyTokenResponse;

@@ -86,16 +86,12 @@ ion-content {
     }
 
   }
-
-  .next_container {
-    width: calc(100% - 16px);
-    bottom: 0;
-    ion-button {
-      border-radius: 13px;
-      --background: #1a82f2;
-      margin: 62px 0 10px 0;
-      font-size: 17px;
-    }
+  ion-button {
+    border-radius: 13px;
+    font-size: 17px;
+    --background: #1a82f2;
+    margin-left: 0;
+    margin-right: 0;
   }
 
 }

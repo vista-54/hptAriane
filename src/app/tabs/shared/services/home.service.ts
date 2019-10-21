@@ -22,21 +22,20 @@ export class HomeService {
     get(data: HomeRequestModel) {
         return this.request.get(APP_URL.homepage.get, data, false, true)
             .pipe(tap((res: HomeResponse) => {
-                    switch (res.code) {
-                        case RESPONSE_CODE.SUCCESS:
-                            localStorage.setItem('home', JSON.stringify(res.result));
-                            localStorage.setItem('home_header', JSON.stringify(res.header));
-                            localStorage.setItem('to_do', JSON.stringify(res['to-do']));
-                            break;
-                        default:
-                            this.commonService.presentModal(CautionModalFailedRetrieveInfoComponent);
-                            break;
-                    }
-                }));
+                switch (res.code) {
+                    case RESPONSE_CODE.SUCCESS:
+                        localStorage.setItem('home', JSON.stringify(res.result));
+                        localStorage.setItem('home_header', JSON.stringify(res.header));
+                        localStorage.setItem('to_do', JSON.stringify(res['to-do']));
+                        break;
+                    default:
+                        this.commonService.presentModal(CautionModalFailedRetrieveInfoComponent);
+                        break;
+                }
+            }));
 
 
     }
-
     datascope(type, data) {
         return this.request.get(APP_URL.datascope[type], data)
             .pipe(tap((res: APIResponse) => {

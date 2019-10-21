@@ -114,6 +114,7 @@ ion-content {
 
   .control_box {
     position: fixed;
+    bottom: 0;
     bottom: env(safe-area-inset-bottom);
     width: 100%;
     visibility: hidden;

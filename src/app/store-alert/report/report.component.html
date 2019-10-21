@@ -38,12 +38,10 @@
             <div>
                 <ion-label class="label label_with_image"><img src="../assets/todo/create_todo_icon.svg">{{'report.comment'|translate}}:
                 </ion-label>
-                <textarea [(ngModel)]="note"></textarea>
+                <ion-textarea [(ngModel)]="note"></ion-textarea>
             </div>
         </div>
     </div>
     <ion-button expand="block active" (click)="send()">{{'report.send'|translate}}</ion-button>
     <ion-button expand="block ok" routerLink="/tabs/home">{{'well.button'|translate}}</ion-button>
-
-
 </ion-content>
