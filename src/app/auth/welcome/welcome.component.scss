@@ -1,7 +1,8 @@
-ion-app{
-  padding-bottom: env(safe-area-inset-bottom)!important;
-  padding-top: env(safe-area-inset-top)!important;
+ion-app {
+  padding-bottom: env(safe-area-inset-bottom) !important;
+  padding-top: env(safe-area-inset-top) !important;
 }
+
 $bluebackground: #1a82f2;
 ion-content {
   --background: #1a82f2;
@@ -54,5 +55,25 @@ ion-content {
 .md {
   .title {
     margin-top: 140px;
+  }
+}
+
+.accept {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  text-align: center;
+  ion-checkbox {
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
+  }
+  a {
+    color: white;
+  }
+  span {
+    padding-right: 2px;
+    padding-left: 2px;
   }
 }
