@@ -5,7 +5,7 @@
         <span class="company">{{header.company}}</span>
     </p>
     <div class="column">
-        <div class="widget" *ngFor="let widget of widgets">
+        <div class="widget" *ngFor="let widget of widgets" [ngClass]="widget.end?'':'blur'">
             <div class="header">
                 <span><img [src]="widgetsParams[widget.name].icon"></span>
                 <span>{{'home.'+widgetsParams[widget.name].title1|translate}}<br>{{'home.'+widgetsParams[widget.name].title2|translate}} </span>

@@ -4,6 +4,9 @@ import {StoreVisitService} from '../shared/services/store-visit.service';
 import {HomeService} from '../shared/services/home.service';
 import {SingleSelectModalComponent} from '../../shared/components/single-select-modal/single-select-modal.component';
 import {ModalController} from '@ionic/angular';
+import {StorevisitRequestModel} from '../shared/models/storevisit-request.model';
+import {RESPONSE_CODE} from '../../shared/constants/response';
+import {UserModel} from '../../shared/models/user.model';
 
 
 @Component({
@@ -24,18 +27,14 @@ export class StoreVisitComponent implements OnInit {
             channel: 'Not selected',
             name: 'Not selected',
         };
-        this.user = JSON.parse(localStorage.user);
-        console.log('cntr')
+        this.user = JSON.parse(localStorage.user) as UserModel;
     }
 
     ngOnInit() {
-        console.log('cntr')
 
     }
 
     ionViewDidEnter() {
-        console.log('cntr')
-
         if (this.route.snapshot.data['data']['code'] === '0') {
             this.data = this.route.snapshot.data['data']['result']['current'];
             console.log(this.data);
@@ -51,16 +50,18 @@ export class StoreVisitComponent implements OnInit {
         });
     }
 
-    load() {
-        return this.storeService.get({user_id: this.user.userid})
-            .subscribe(data => {
-                if (data.code === '1') {
+    async load() {
+        const data = {} as StorevisitRequestModel;
+        data.user_id = this.user.userid;
+        return this.storeService.get(data)
+            .subscribe((response: APIResponse) => {
+                if (response.code !== RESPONSE_CODE.SUCCESS) {
                     this.data = {
                         channel: 'Not selected',
                         name: 'Not selected',
                     };
                 } else {
-                    this.data = data.result.current;
+                    this.data = response.result.current;
                 }
             });
     }
@@ -79,7 +80,6 @@ export class StoreVisitComponent implements OnInit {
     }
 
     confirm() {
-        debugger
         this.router.navigate(['store-alert'], {
             queryParams: {
                 channel: this.data.channel,

@@ -9,6 +9,11 @@ import {RESPONSE_CODE} from '../../../shared/constants/response';
 import {CommonService} from '../../../shared/services/common.service';
 import {CautionModalFailedRetrieveInfoComponent} from '../../../shared/components/caution-modal-failed-retrieve-info/caution-modal-failed-retrieve-info.component';
 
+declare interface Coords {
+    lat: string;
+    lng: string;
+}
+
 @Injectable()
 export class StoreVisitService implements Resolve<any> {
 
@@ -23,9 +28,14 @@ export class StoreVisitService implements Resolve<any> {
     }
 
     get(data) {
+        const coords = JSON.parse(localStorage.getItem('coords'));
+        if (coords) {
+            data.latitude = coords.lat;
+            data.longitude = coords.lng;
+        }
         return this.request.get(APP_URL.store_visit.get, data)
             .pipe(tap((res: APIResponse) => {
-                    if (res.code !== '0') {
+                    if (res.code !== RESPONSE_CODE.SUCCESS) {
                         this.commonService.presentModal(CautionModalFailedRetrieveInfoComponent);
                         throw Error(res.message);
                     }

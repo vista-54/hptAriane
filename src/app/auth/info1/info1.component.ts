@@ -28,9 +28,9 @@ export class Info1Component implements OnInit {
         events.subscribe('login:error', () => {
             this.inputElement.setFocus();
         });
-        const loginCredentials = localStorage.getItem('login');
+        const loginCredentials = JSON.parse(localStorage.getItem('login'))
         if (loginCredentials) {
-            this.credentials.patchValue(JSON.parse(loginCredentials));
+            this.credentials.patchValue(loginCredentials);
         }
 
     }
