@@ -14,18 +14,23 @@
     "note2": "The security token will be sent to the administrator of your company.",
     "note3": "If you did not receive the email, please contact",
     "note4": "The security token will expire in 24 hours.",
-    "next": "Next"
+    "next": "Request Token"
   },
   "m_unregister": {
     "header": " CAUTION!",
-    "p1": "This supplier has not been registered in the HPT Ariane system.",
-    "p2": "Please register.",
+    "p1": "TWe cannot find your Supplier Code in our Database.",
+    "p2": "Please click on the register button to record your information",
     "ok": "OK"
   },
   "m_mismatch": {
-    "p1": "The supplier and email address do not match",
+    "p1": "We are sorry, your email and supplier code do not match in our database.",
     "p2": "Please try again.",
     "p3": "Please register."
+  },
+  "m_mismatch_secondary":{
+    "p1": "We are sorry, it still doesn't match.",
+    "p2":"Please contact our Team email who will help you"
+
   },
   "m_thirty_inactive": {
     "p1": "Your last activity happened longer than the specified activity period allowed.",
@@ -57,8 +62,10 @@
     "subscription": "Subscription",
     "email": "Email Address",
     "phone": "Mobile Phone",
-    "code": "Security Code",
-    "request": "Request a Security Token"
+    "code": "Please enter your security token here",
+    "request": "Request a Security Token",
+    "next": "Next"
+
   },
   "m_token_sent": {
     "header": "The security token is sent!",
@@ -69,16 +76,14 @@
   },
   "m_token_invalid": {
     "header": "CAUTION!",
-    "p1": "Invalid security token.",
-    "p2": "Please try again.",
+    "p1": "Your security Token does not match our database record.",
+    "p2": "Please key it in again.",
     "button": "OK"
   },
   "m_invalid_mlt": {
     "header": "CAUTION!",
-    "p1": "You have tried entering the invalid security token more than the specified number of times allowed.We have to suspend your trying due to the security reason.",
-    "p2": "Please contact our customer care team at",
-    "p3": "to renew your subscription.",
-    "p4": "Thank you very much for using our app and our service.",
+    "p1": "We are sorry, your security token needs to be renewed. ",
+    "p2": "Please request for a new Token ",
     "button": "OK"
   },
   "options": {
@@ -175,7 +180,7 @@
   },
   "m_reg_success": {
     "title": "REGISTRATION SUCCESS!",
-    "p1": "Your registration request has been received! Our marketing team will contact your shortly.",
+    "p1": "Your registration request is now being processed. Our team will get in touch with you soon",
     "p2": "Thank you very much for using our app and our service."
   },
   "m_react_success": {

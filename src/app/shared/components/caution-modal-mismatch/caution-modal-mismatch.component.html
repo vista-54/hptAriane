@@ -6,8 +6,7 @@
 
         <p>{{'m_mismatch.p1'|translate}}</p>
         <br>
-        <p *ngIf="counter<3">{{'m_mismatch.p2'|translate}}</p>
-        <p *ngIf="counter>=3">{{'m_mismatch.p3'|translate}}</p>
+        <p>{{'m_mismatch.p2'|translate}}</p>
     </div>
     <ion-button class="okButton" expand="block" (click)="dismiss()"> {{'m_unregister.ok'|translate}}
     </ion-button>

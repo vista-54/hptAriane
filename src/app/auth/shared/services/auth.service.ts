@@ -24,6 +24,7 @@ import {RESPONSE_CODE} from '../../../shared/constants/response';
 import {RequestTokenModel} from '../models/requestToken.model';
 import {CommonService} from '../../../shared/services/common.service';
 import {SettingsModel} from '../../../shared/models/settings.model';
+import {ModalSecondWrongCredentialsComponent} from '../../../shared/components/modal-second-wrong-credentials/modal-second-wrong-credentials.component';
 
 
 @Injectable()
@@ -69,7 +70,11 @@ export class AuthService implements Resolve<any> {
                         break;
                     case RESPONSE_CODE_LOGIN.CREDENTIALS_MISMATCH:
                         this.errorCounterLogin++;
-                        this.commonService.presentModal(CautionModalMismatchComponent, {counter: this.errorCounterLogin});
+                        if (this.errorCounterLogin > 1) {
+                            this.commonService.presentModal(ModalSecondWrongCredentialsComponent);
+                        } else {
+                            this.commonService.presentModal(CautionModalMismatchComponent);
+                        }
                         break;
                     case RESPONSE_CODE_LOGIN.MISSED_REQUIRED_INFO:
                         this.commonService.presentModal(CautionModalMissedComponent);

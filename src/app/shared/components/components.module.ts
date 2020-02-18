@@ -33,6 +33,7 @@ import {StoreChannelComponent} from './store-channel/store-channel.component';
 import {AboutModalComponent} from './about-modal/about-modal.component';
 import {AccessDaniedComponent} from './access-danied/access-danied.component';
 import {ServerErrorModalComponent} from './server-error-modal/server-error-modal.component';
+import {ModalSecondWrongCredentialsComponent} from './modal-second-wrong-credentials/modal-second-wrong-credentials.component';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import {ServerErrorModalComponent} from './server-error-modal/server-error-modal
         StoreChannelComponent,
         AboutModalComponent,
         AccessDaniedComponent,
-        ServerErrorModalComponent
+        ServerErrorModalComponent,
+        ModalSecondWrongCredentialsComponent
     ],
     imports: [
         IonicModule,
@@ -101,7 +103,8 @@ import {ServerErrorModalComponent} from './server-error-modal/server-error-modal
         StoreChannelComponent,
         AboutModalComponent,
         AccessDaniedComponent,
-        ServerErrorModalComponent
+        ServerErrorModalComponent,
+        ModalSecondWrongCredentialsComponent
     ],
     entryComponents: [CautionModalMismatchComponent,
         CautionModalExpiredComponent, HeaderComponent, TokenSentComponent, RegistrationSuccessComponent, UnregisteredModalComponent,
@@ -126,7 +129,8 @@ import {ServerErrorModalComponent} from './server-error-modal/server-error-modal
         StoreChannelComponent,
         AboutModalComponent,
         AccessDaniedComponent,
-        ServerErrorModalComponent
+        ServerErrorModalComponent,
+        ModalSecondWrongCredentialsComponent
     ],
     providers: [
         HomeService
